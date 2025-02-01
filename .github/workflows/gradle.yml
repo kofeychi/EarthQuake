@@ -35,3 +35,8 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/
+      - name: Publish to GitHub Packages
+        run: ./gradlew publish
+        env:
+          USERNAME: ${{ github.actor }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
