@@ -2,12 +2,14 @@ package dev.kofeychi.earthquake.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dev.kofeychi.earthquake.impl.Debug.RegDebug;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 
@@ -24,7 +26,9 @@ public class Earthquake implements ModInitializer , ClientModInitializer {
         PayloadTypeRegistry.playS2C().register(ScreenShakeInstancePacket.ID, ScreenShakeInstancePacket.CODEC);
         ServerLifecycleEvents.SERVER_STARTING.register(server -> this.Server = server);
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> this.Server = null);
-        //RegDebug.init();
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()){
+            RegDebug.init();
+        }
     }
 
     @Override
