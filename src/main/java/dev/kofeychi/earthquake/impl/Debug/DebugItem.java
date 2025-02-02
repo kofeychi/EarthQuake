@@ -21,29 +21,24 @@ public class DebugItem extends Item {
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
         Pipeline pl = new Pipeline(
-                new Pipeline(
                         500,
                         EScreenShakeData.EaseType.LINEAR,
-                        EScreenShakeData.RngType.RANDOM,
-                        1.5f,
+                        EScreenShakeData.RngType.PERLIN,
+                        1f,
                         0,
                         Easing.QUAD_IN
-                ),
-                user.getPos(),
-                2,
-                10
         );
         pl.PerlinIntensity=1;
-        pl.PerlinSpeed=2f;
+        pl.PerlinSpeed=5f;
         if (world.isClient()) {
             if (!user.isSneaking()) {
                 ScreenShakeHandler.addInstance(
                         new ScreenShakeInstance(
                                 PipelineCluster.NewPipelineCluster(pl,
                                         new EnabledAffections(
-                                                false,
-                                                false,
-                                                false,
+                                                true,
+                                                true,
+                                                true,
                                                 true,
                                                 true,
                                                 true
