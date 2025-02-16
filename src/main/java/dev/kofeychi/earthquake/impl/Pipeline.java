@@ -127,9 +127,9 @@ public class Pipeline {
         float percentage = (lifetime / (float) duration);
         if (EaseMode == EScreenShakeData.EaseType.INOUT) {
             if (percentage >= 0.5f) {
-                return MathHelper.lerp(Easing.valueOf(OutCurve).ease(percentage - 0.5f, 0, 1, 0.5f), OutIntensity, InIntensity);
+                return MathHelper.lerp(Easing.valueOf(OutCurve).ease(percentage - 0.5f, 0, 1, 0.5f), InIntensity, OutIntensity);
             } else {
-                return MathHelper.lerp(Easing.valueOf(InCurve).ease(percentage, 0, 1, 0.5f), InIntensity, OutIntensity);
+                return MathHelper.lerp(Easing.valueOf(InCurve).ease(percentage, 0, 1, 0.5f), OutIntensity, InIntensity);
             }
         } else {
             return MathHelper.lerp(Easing.valueOf(LinearCurve).ease(percentage, 0, 1, 1), InIntensity, OutIntensity);

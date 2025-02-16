@@ -23,15 +23,15 @@ public class DebugItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         Pipeline pl = new Pipeline(
-                        500,
-                        EScreenShakeData.EaseType.LINEAR,
+                        100,
+                        EScreenShakeData.EaseType.INOUT,
                         EScreenShakeData.RngType.PERLIN,
                         1f,
                         0,
                         Easing.QUAD_IN
         );
         pl.PerlinIntensity=.7f;
-        pl.PerlinSpeed=1f;
+        pl.PerlinSpeed=4f;
         if (world.isClient()) {
             if (!user.isSneaking()) {
                 ScreenShakeHandler.addInstance(
