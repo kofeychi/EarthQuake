@@ -21,5 +21,5 @@ public class RegDebug {
         // Return the registered item!
         return registeredItem;
     }
-    public static final Item DEBUG_ITEM = register(new DebugItem(new Item.Settings().modelId(Identifier.ofVanilla("stick")).registryKey(DEBUG_ITEM_KEY)),DEBUG_ITEM_KEY);
+    public static final Item DEBUG_ITEM = register(new DebugItem(new Item.Settings()),DEBUG_ITEM_KEY);
 }

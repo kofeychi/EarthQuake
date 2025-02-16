@@ -9,8 +9,10 @@ import dev.kofeychi.earthquake.impl.Util.Easing;
 import dev.kofeychi.earthquake.impl.Util.EnabledAffections;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class DebugItem extends Item {
@@ -19,7 +21,7 @@ public class DebugItem extends Item {
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         Pipeline pl = new Pipeline(
                         500,
                         EScreenShakeData.EaseType.LINEAR,
@@ -28,8 +30,8 @@ public class DebugItem extends Item {
                         0,
                         Easing.QUAD_IN
         );
-        pl.PerlinIntensity=1;
-        pl.PerlinSpeed=5f;
+        pl.PerlinIntensity=.7f;
+        pl.PerlinSpeed=1f;
         if (world.isClient()) {
             if (!user.isSneaking()) {
                 ScreenShakeHandler.addInstance(
@@ -48,6 +50,6 @@ public class DebugItem extends Item {
                 );
             }
         }
-        return ActionResult.SUCCESS;
+        return TypedActionResult.pass(user.getStackInHand(hand));
     }
 }
